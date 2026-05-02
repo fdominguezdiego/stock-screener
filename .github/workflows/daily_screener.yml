@@ -1,0 +1,28 @@
+name: Daily Stock Screener
+
+on:
+  schedule:
+    - cron: '0 7 * * 1-5'   # 7:00 AM UTC Mon–Fri (= 8:00 AM Spain time / 9:00 AM summer)
+  workflow_dispatch:          # Also allows manual trigger from GitHub UI
+
+jobs:
+  run-screener:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install yfinance pandas
+
+      - name: Run screener
+        env:
+          GMAIL_ADDRESS:  ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
+          SEND_TO:        ${{ secrets.SEND_TO }}
+        run: python screener.py
