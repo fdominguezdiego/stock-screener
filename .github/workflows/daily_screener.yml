@@ -2,8 +2,8 @@ name: Daily Stock Screener
 
 on:
   schedule:
-    - cron: '0 7 * * 1-5'   # 7:00 AM UTC Mon–Fri (= 8:00 AM Spain winter / 9:00 AM summer)
-  workflow_dispatch:          # Manual trigger from GitHub Actions tab
+    - cron: '0 7 * * 1-5'   # 7:00 AM UTC Mon–Fri (= 8:00 Spain winter / 9:00 summer)
+  workflow_dispatch:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -21,7 +21,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install yfinance pandas
+        run: pip install yfinance pandas lxml html5lib
 
       - name: Run screener
         env:
