@@ -26,7 +26,7 @@ CONDITIONS = {
     "rev_growth_min": 15.0,
     "above_sma84":    True,
     "ath_within_pct": 15.0,
-    "rs_min":         85,
+    "rs_min":         90,
 }
 
 ACTIVE_EXCHANGES = [
